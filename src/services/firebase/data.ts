@@ -187,7 +187,7 @@ async function updateCustomer(owner: string, id: string, body: Body) {
   const name = textValue(body.name ?? snap.data().name, 'Customer name', 120)
   const phone = textValue(body.phone ?? snap.data().phone, 'Phone number', 30, false)
   const address = textValue(body.address ?? snap.data().address, 'Address', 300, false)
-  await runTransaction(getFirebaseServices().db, tx => {
+  await runTransaction(getFirebaseServices().db, async tx => {
     tx.update(ref, { name, phone, address, updatedAt: serverTimestamp(), updatedBy: owner })
   })
   await appendAudit(owner, 'CUSTOMER_UPDATED', 'CUSTOMER', id, `Updated customer ${name}.`)
@@ -416,7 +416,7 @@ async function generateBills(owner: string, body: Body) {
         actorUid: owner, createdAt: serverTimestamp(),
       })
       const totalCreditUsed = openingAdvanceAppliedTotal + paymentCreditAppliedTotal
-      const customerUpdates: Record<string, unknown> = {}
+      const customerUpdates: DocumentData = {}
       if (totalCreditUsed > 0) customerUpdates.creditBalancePoisha = Math.max(0, currentCredit - totalCreditUsed)
       if (openingAdvanceAppliedTotal > 0) customerUpdates.openingAdvanceRemainingPoisha = Math.max(0, openingAdvanceRemaining - openingAdvanceAppliedTotal)
       if (openingDueRemaining !== openingDueAfterAllocation) customerUpdates.openingBalanceRemainingPoisha = openingDueAfterAllocation
