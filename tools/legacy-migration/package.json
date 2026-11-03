@@ -1,0 +1,14 @@
+{
+  "name": "ali-al-fateeh-legacy-data-migration",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node migrate-legacy-data.mjs"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.4.0"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}
