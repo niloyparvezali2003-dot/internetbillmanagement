@@ -1717,3 +1717,65 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .customer-mobile-card,
   .billing-confirm-dialog { animation: none !important; transition: none !important; }
 }
+
+/* Keep mobile customer actions visually consistent with the desktop icon toolbar. */
+@media (max-width: 700px) {
+  .customer-mobile-actions {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-top: 13px;
+    padding-top: 1px;
+  }
+  .customer-mobile-actions .action-icon-button {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 42px;
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    min-height: 42px;
+    padding: 0;
+    border: 1px solid #E1EAF4;
+    border-radius: 11px;
+    background: #FFFFFF;
+    color: var(--brand-electric);
+  }
+  .customer-mobile-actions .action-icon-button svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
+  }
+  .customer-mobile-actions .action-icon-button:hover,
+  .customer-mobile-actions .action-icon-button:focus-visible {
+    border-color: #BFD3F1;
+    background: #EAF2FF;
+    color: var(--brand-electric);
+    outline: none;
+  }
+  .customer-mobile-actions .danger-icon-button {
+    border-color: #F2D4D1;
+    background: #FFF8F7;
+    color: var(--brand-danger);
+  }
+  .customer-mobile-actions .danger-icon-button:hover,
+  .customer-mobile-actions .danger-icon-button:focus-visible {
+    border-color: #E7B8B3;
+    background: #FFF0EE;
+    color: var(--brand-danger);
+  }
+  .customer-mobile-actions .success-icon-button {
+    border-color: #D4EBDD;
+    background: #F3FBF6;
+    color: #16834A;
+  }
+  .customer-mobile-actions .success-icon-button:hover,
+  .customer-mobile-actions .success-icon-button:focus-visible {
+    border-color: #B6DDC7;
+    background: #EAF7EF;
+    color: #117340;
+  }
+}
+
