@@ -44,12 +44,19 @@ function Dashboard({ email, onLogout }: { email: string; onLogout: () => void })
   const [selectedCustomerId, setSelectedCustomerId] = useState('')
 
   useEffect(() => {
-    const syncPage = () => { setPage(readPageFromHash()); setMenuOpen(false); setMoreOpen(false) }
+    const syncPage = () => {
+      const nextPage = readPageFromHash()
+      setPage(nextPage)
+      if (nextPage !== 'ledgers') setSelectedCustomerId('')
+      setMenuOpen(false)
+      setMoreOpen(false)
+    }
     window.addEventListener('hashchange', syncPage)
     return () => window.removeEventListener('hashchange', syncPage)
   }, [])
 
   function navigate(nextPage: PageId) {
+    if (nextPage !== 'ledgers' || nextPage === page) setSelectedCustomerId('')
     if (nextPage !== page) window.location.hash = `/${nextPage}`
     else setPage(nextPage)
     setMenuOpen(false)
